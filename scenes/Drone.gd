@@ -4,7 +4,7 @@ class_name Drone
 
 export(int, 2, 6) var LOOP_SLOTS: int = 2
 export var HEALTH: float = 10.0
-export var SPEED: float = 10.0
+export var SPEED: float = 2.0
 export var SCHEDULER_RESOLUTION: float = 5.0
 export var SCHEDULER_NOTIFY: float = 1.5
 
