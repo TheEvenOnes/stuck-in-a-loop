@@ -62,11 +62,9 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=800
-window/size/height=450
+window/size/width=1920
+window/size/height=1080
 window/size/resizable=false
-window/size/test_width=1600
-window/size/test_height=900
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
@@ -80,5 +78,5 @@ window/stretch/aspect="expand"
 
 quality/shadows/filter_mode=2
 quality/filters/use_nearest_mipmap_filter=true
-quality/filters/msaa=2
+quality/filters/msaa=4
 environment/default_environment="res://default_env.tres"
