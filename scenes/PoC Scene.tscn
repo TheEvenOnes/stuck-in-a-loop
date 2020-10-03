@@ -151,11 +151,12 @@ shape = SubResource( 11 )
 
 [node name="OmniLight" type="OmniLight" parent="Drone"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302097, 0 )
-light_color = Color( 0.321569, 0.917647, 0.996078, 1 )
-light_energy = 0.83
+light_color = Color( 0.752941, 0.509804, 0.937255, 1 )
+light_specular = 0.0
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.979575, 0.184261, -0.0805015, 0, 0.400349, 0.916363, 0.201079, -0.897646, 0.392171, -1.84927, 16.1241, 8.23228 )
+near = 10.0
 
 [node name="Citadel" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
