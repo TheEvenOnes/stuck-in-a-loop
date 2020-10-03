@@ -8,4 +8,4 @@ func _process(delta: float) -> void:
 	elapsed += delta
 
 	light_energy = ((1.0 + sin(elapsed * ANGULAR_SPEED)) * 0.5) * 0.15
-	transform = transform.rotated(Vector3.UP, elapsed * ANGULAR_SPEED / 360 )
+	rotate_y(delta * ANGULAR_SPEED)
