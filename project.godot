@@ -8,16 +8,59 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "StaticBody",
+"class": "Citadel",
+"language": "GDScript",
+"path": "res://scenes/Citadel.gd"
+}, {
+"base": "KinematicBody",
+"class": "Drone",
+"language": "GDScript",
+"path": "res://scenes/Drone.gd"
+}, {
+"base": "Task",
+"class": "Patrol",
+"language": "GDScript",
+"path": "res://scenes/Patrol.gd"
+}, {
+"base": "Task",
+"class": "Shoot",
+"language": "GDScript",
+"path": "res://scenes/Shoot.gd"
+}, {
+"base": "Spatial",
+"class": "Task",
+"language": "GDScript",
+"path": "res://scenes/Task.gd"
+} ]
 _global_script_class_icons={
-
+"Citadel": "",
+"Drone": "",
+"Patrol": "",
+"Shoot": "",
+"Task": ""
 }
 
 [application]
 
 config/name="meh"
+run/main_scene="res://scenes/PoC Scene.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1600
+window/size/height=900
+window/size/resizable=false
+window/size/test_width=1600
+window/size/test_height=900
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [rendering]
 
+quality/shadows/filter_mode=2
+quality/filters/use_nearest_mipmap_filter=true
+quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"
