@@ -1,7 +1,7 @@
 extends Task
 class_name Shoot
 
-const Projectile = preload("res://scenes/Projectile.tscn")
+const Projectile = preload("res://scenes/game_objects/Projectile.tscn")
 
 export var COOLDOWN: float = 1.2
 export var RANGE: float = 55.0
@@ -14,7 +14,7 @@ onready var sensors: Area = $Area
 func _ready() -> void:
 	sensors_collider.shape.radius = RANGE
 
-func update(delta: float, delta_attenuated: float) -> void:
+func update(delta: float, delta_attenuated: float, _patrol_path: Path) -> void:
 	var drone = get_drone()
 
 	cooldown -= delta

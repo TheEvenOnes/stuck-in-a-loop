@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Position3D
 class_name Drone
 
 
@@ -8,11 +8,12 @@ export var SPEED: float = 2.0
 export var SCHEDULER_RESOLUTION: float = 3.0
 export var SCHEDULER_NOTIFY: float = 1.0
 export var DELAY: float = 0.0
+export(NodePath) var PATROL_PATH: NodePath
 
 onready var delay: float = DELAY
 onready var cooldown: float = SCHEDULER_RESOLUTION
 onready var current_task_index = 0
-onready var tasks: Array = $Tasks.get_children()
+onready var tasks: Array = $Root/Tasks.get_children()
 
 func _process(delta: float) -> void:
 	if delay > 0.0:
@@ -33,4 +34,4 @@ func _process(delta: float) -> void:
 		delta_attenuated *= clamp((1.0 - SCHEDULER_NOTIFY + cooldown) / SCHEDULER_NOTIFY, 0.0, 1.0)
 
 	var task = tasks[current_task_index]
-	task.update(delta, delta_attenuated)
+	task.update(delta, delta_attenuated, get_node(PATROL_PATH))

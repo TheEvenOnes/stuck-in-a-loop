@@ -1,7 +1,7 @@
 extends Spatial
 class_name Projectile
 
-const ProjectileImpact = preload("res://scenes/ProjectileImpact.tscn")
+const ProjectileImpact = preload("res://scenes/game_objects/ProjectileImpact.tscn")
 
 export var LIFE: float = 10.0
 export var DAMAGE: float = 1.0
@@ -20,6 +20,8 @@ func _process(delta: float) -> void:
 	if life <= 0.0:
 		queue_free()
 		return
+
+	$Sprite3D.scale = Vector3(10, 10, 10) * (0.5 + 0.25 * sin(life * 25.0))
 
 	var overlapping_entities = $Area.get_overlapping_bodies()
 	for body in overlapping_entities:

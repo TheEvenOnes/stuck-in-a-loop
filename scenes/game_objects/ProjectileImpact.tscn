@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/game_objects/ProjectileImpact.gd" type="Script" id=1]
+[ext_resource path="res://assets/splat.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_do_not_receive_shadows = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_color = Color( 0.827451, 0.529412, 0.858824, 0.133333 )
+albedo_texture = ExtResource( 2 )
+emission_enabled = true
+emission = Color( 0.882353, 0.454902, 0.945098, 1 )
+emission_energy = 8.02
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 1, 1, 1, 0.215686, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0.391393 ), 0.0, 0.0, 0, 0, Vector2( 0.210526, 0.227459 ), -0.340619, -0.340619, 0, 0, Vector2( 0.808271, 0.0963116 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+direction = Vector3( 0, 1, 0 )
+spread = 60.0
+gravity = Vector3( 0, 5, 0 )
+initial_velocity = 3.0
+initial_velocity_random = 1.0
+linear_accel = 1.0
+scale_curve = SubResource( 11 )
+color_ramp = SubResource( 9 )
+
+[sub_resource type="QuadMesh" id=13]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Particles" type="Particles" parent="."]
+material_override = SubResource( 1 )
+cast_shadow = 0
+emitting = false
+amount = 32
+lifetime = 0.2
+one_shot = true
+process_material = SubResource( 12 )
+draw_pass_1 = SubResource( 13 )

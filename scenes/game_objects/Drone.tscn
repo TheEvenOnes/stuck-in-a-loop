@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/game_objects/Shoot.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_objects/Patrol.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game_objects/Drone.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game_objects/Tag.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/yugo_decal.png" type="Texture" id=5]
+[ext_resource path="res://assets/drone_basicl.png" type="Texture" id=6]
+
+
+[sub_resource type="SphereShape" id=1]
+radius = 5.0
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.2
+height = 0.2
+
+[node name="Drone" type="Position3D"]
+script = ExtResource( 3 )
+
+[node name="Root" type="KinematicBody" parent="." groups=[
+"drone",
+]]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="Tag" parent="Root" instance=ExtResource( 4 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.483705, 0 )
+PERIOD = 2.0
+AMPLITUDE = 0.05
+TEXTURE = ExtResource( 5 )
+
+[node name="Drone" type="Sprite3D" parent="Root"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+cast_shadow = 2
+billboard = 1
+texture = ExtResource( 6 )
+
+[node name="Tasks" type="Spatial" parent="Root"]
+
+[node name="Patrol" type="Spatial" parent="Root/Tasks"]
+script = ExtResource( 2 )
+PATH = NodePath("../../../../Path")
+
+[node name="Shoot" type="Spatial" parent="Root/Tasks"]
+script = ExtResource( 1 )
+
+[node name="Area" type="Area" parent="Root/Tasks/Shoot"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="DetectionRange" type="CollisionShape" parent="Root/Tasks/Shoot/Area"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Root"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="OmniLight" type="OmniLight" parent="Root"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302097, 0 )
+light_color = Color( 0.752941, 0.509804, 0.937255, 1 )
+light_specular = 0.0
