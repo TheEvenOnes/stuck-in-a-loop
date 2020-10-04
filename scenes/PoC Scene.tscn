@@ -271,7 +271,9 @@ curve = SubResource( 12 )
 [node name="Enemies" type="Spatial" parent="."]
 
 [node name="Dummy" parent="Enemies" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9599, 0.300873, -9.76984 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1202, 0.300873, -9.76984 )
 HEALTH = 200.0
+NAV_MESH = NodePath("../../Navigation")
+TARGET = NodePath("../../Citadel")
 
 [node name="Particles" type="Spatial" parent="."]
