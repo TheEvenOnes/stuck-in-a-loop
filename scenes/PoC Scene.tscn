@@ -252,6 +252,9 @@ pixel_size = 0.02
 billboard = 1
 texture = ExtResource( 6 )
 
+[node name="Turret" type="Position3D" parent="Citadel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+
 [node name="Collider" type="CollisionShape" parent="Citadel"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 11 )
@@ -278,9 +281,9 @@ __meta__ = {
 }
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.985737, -0.0864437, 0.135681, -0.129937, -0.925972, 0.354531, 0.0949935, -0.367357, -0.924134, 0, 4.79984, 0 )
+transform = Transform( -0.901188, -0.0367597, -0.426308, -0.129937, -0.925972, 0.354531, -0.40763, 0.375413, 0.829987, 0, 4.79984, 0 )
 light_color = Color( 0.835294, 0.835294, 0.835294, 1 )
-light_energy = 0.149948
+light_energy = 0.0992115
 light_indirect_energy = 2.0
 light_specular = 0.0
 light_bake_mode = 2

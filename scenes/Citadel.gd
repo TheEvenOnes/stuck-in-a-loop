@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 		var result = space_state.intersect_ray(from, to)
 
 		var projectile = Projectile.instance()
-		projectile.set_target(global_transform.origin, result.position)
+		projectile.set_target($Turret.global_transform.origin, result.position)
 		$ProjectileBucket.add_child(projectile)
 
 func take_damage(damage: float) -> void:
