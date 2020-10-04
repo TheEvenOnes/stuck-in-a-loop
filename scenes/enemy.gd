@@ -6,27 +6,41 @@ export var AI_DECISION_TIMEOUT: float = 0.5  # how often are decisions made
 export var NAV_MESH: NodePath                # a Navigation used for pathfinding
 export var TARGET: NodePath                  # a Node used as target for pathfinding
 export var SPEED: float = 3
+export var AI_ENABLED: bool = true
 
 onready var health: float = HEALTH
 onready var ai_decision_timeout: float = AI_DECISION_TIMEOUT
 var path: PoolVector3Array
 var path_offset: float = 0
+var dead_remove_ttl: float = INF
+const EnemyExplosion = preload("res://scenes/game_objects/EnemyExplosion.tscn")
 
 func take_damage(damage: float) -> void:
-	health -= damage
-	if health <= 0.0:
-		# TODO: boom effect
-		queue_free()
+	if !is_inf(dead_remove_ttl):
 		return
 
+	health -= damage
+	if health <= 0.0:
+		var enemy_explosion = EnemyExplosion.instance()
+		get_tree().current_scene.get_node('Particles').add_child(enemy_explosion)
+		enemy_explosion.global_transform.origin = self.global_transform.origin
+		enemy_explosion.emitting = true
+		dead_remove_ttl = 0.5
 
 func _process(delta: float) -> void:
-	ai_decision_timeout -= delta
-	while ai_decision_timeout < 0:
-		ai_decision()
-		ai_decision_timeout += AI_DECISION_TIMEOUT
+	if !is_inf(dead_remove_ttl):
+		dead_remove_ttl -= delta
+		if dead_remove_ttl < 0:
+			queue_free()
+		return
 
-	navpath_move(delta)
+	if AI_ENABLED:
+		ai_decision_timeout -= delta
+		while ai_decision_timeout < 0:
+			ai_decision()
+			ai_decision_timeout += AI_DECISION_TIMEOUT
+
+		navpath_move(delta)
 
 
 func ai_decision() -> void:
