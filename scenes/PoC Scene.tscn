@@ -278,9 +278,9 @@ __meta__ = {
 }
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.322907, 0.29852, 0.897975, -0.129937, -0.925972, 0.354531, 0.937317, -0.231176, -0.260216, 0, 4.79984, 0 )
+transform = Transform( 0.0128966, 0.355885, 0.934062, -0.129937, -0.925972, 0.354531, 0.991011, -0.125964, 0.0342952, 0, 4.79984, 0 )
 light_color = Color( 0.835294, 0.835294, 0.835294, 1 )
-light_energy = 0.0781871
+light_energy = 0.0783559
 light_indirect_energy = 2.0
 light_specular = 0.0
 light_bake_mode = 2
@@ -294,7 +294,7 @@ script = ExtResource( 11 )
 [node name="Enemies" type="Spatial" parent="."]
 
 [node name="Dummy" parent="Enemies" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1202, 0.300873, -9.76984 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9599, 0.300873, -9.76984 )
 HEALTH = 200.0
 NAV_MESH = NodePath("../../Navigation")
 TARGET = NodePath("../../Citadel")
