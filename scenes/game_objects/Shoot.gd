@@ -41,5 +41,5 @@ func shoot() -> void:
 
 	if closest_enemy:
 		var projectile = Projectile.instance()
-		projectile.set_target(global_transform.origin, closest_enemy.global_transform.origin)
+		projectile.set_target(global_transform.origin + Vector3(0.0, 0.5, 0.0), closest_enemy.global_transform.origin)
 		get_tree().current_scene.get_node('Projectiles').add_child(projectile)

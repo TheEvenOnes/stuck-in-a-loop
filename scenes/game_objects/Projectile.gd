@@ -1,5 +1,4 @@
 extends Spatial
-class_name Projectile
 
 const ProjectileImpact = preload("res://scenes/game_objects/ProjectileImpact.tscn")
 
@@ -21,20 +20,24 @@ func _process(delta: float) -> void:
 		queue_free()
 		return
 
-	$Sprite3D.scale = Vector3(10, 10, 10) * (0.5 + 0.25 * sin(life * 25.0))
+	$Sprite3D.scale = Vector3(1, 1, 1) * (0.5 + 0.25 * sin(life * 25.0))
 
 	var overlapping_entities = $Area.get_overlapping_bodies()
 	for body in overlapping_entities:
 		if body.is_in_group('enemy'):
 			body.take_damage(DAMAGE)
 			var impact_anim = ProjectileImpact.instance()
-			impact_anim.global_transform.origin = global_transform.origin - Vector3(0.0, 0.2, 0.0)
+			impact_anim.global_transform.origin = global_transform.origin
 			var particles = get_tree().current_scene.get_node('Particles')
 			particles.add_child(impact_anim)
 			translation.y -= 10.0
 			return
 		if body.is_in_group('environment'):
-			queue_free()
+			var impact_anim = ProjectileImpact.instance()
+			impact_anim.global_transform.origin = global_transform.origin
+			var particles = get_tree().current_scene.get_node('Particles')
+			particles.add_child(impact_anim)
+			translation.y -= 10.0
 			return
 
 	velocity.y -= delta * GRAVITY

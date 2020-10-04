@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game_objects/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://materials/projectile.tres" type="Material" id=2]
@@ -7,12 +7,36 @@
 [sub_resource type="SphereShape" id=1]
 radius = 0.4
 
-[sub_resource type="QuadMesh" id=2]
-material = ExtResource( 2 )
-size = Vector2( 0.125, 0.125 )
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 1, 1, 1, 0.764706, 1, 1, 1, 0 )
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.311475 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+gravity = Vector3( 0, 0.1, 0 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 8 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_blend_mode = 1
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_color = Color( 0.917647, 0.192157, 1, 0.501961 )
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="QuadMesh" id=2]
+material = SubResource( 6 )
 
 [node name="Projectile" type="Spatial"]
 script = ExtResource( 1 )
@@ -26,19 +50,18 @@ transform = Transform( 0.498632, 0, 0, 0, 0.498632, 0, 0, 0, 0.498632, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 material_override = ExtResource( 2 )
 cast_shadow = 0
 modulate = Color( 0.933333, 0.682353, 1, 1 )
 billboard = 1
 texture = ExtResource( 3 )
 
-[node name="CPUParticles" type="CPUParticles" parent="."]
-transform = Transform( 2.01512, 0, 0, 0, 1, 0, 0, 0, 2.01512, 0, 0, 0 )
-cast_shadow = 0
+[node name="Particles" type="Particles" parent="."]
 amount = 128
-lifetime = 2.0
+lifetime = 0.25
+explosiveness = 0.05
+fixed_fps = 60
 local_coords = false
-mesh = SubResource( 2 )
-gravity = Vector3( 0, -1, 0 )
-scale_amount = 2.0
-color_ramp = SubResource( 3 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 2 )

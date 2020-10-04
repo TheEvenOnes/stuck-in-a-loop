@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/yugo_decal.png" type="Texture" id=5]
 [ext_resource path="res://assets/drone_basicl.png" type="Texture" id=6]
 
-
 [sub_resource type="SphereShape" id=1]
 radius = 5.0
 
