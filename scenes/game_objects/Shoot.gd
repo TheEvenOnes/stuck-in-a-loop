@@ -4,7 +4,7 @@ class_name Shoot
 const Projectile = preload("res://scenes/game_objects/Projectile.tscn")
 
 export var COOLDOWN: float = 1.2
-export var RANGE: float = 55.0
+export var RANGE: float = 12.0
 
 onready var cooldown: float = COOLDOWN
 onready var sensors_collider: CollisionShape = $Area/DetectionRange

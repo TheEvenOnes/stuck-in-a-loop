@@ -16,29 +16,29 @@ emission_energy = 8.02
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 0.215686, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=9]
-gradient = SubResource( 8 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0.391393 ), 0.0, 0.0, 0, 0, Vector2( 0.210526, 0.227459 ), -0.340619, -0.340619, 0, 0, Vector2( 0.808271, 0.0963116 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=11]
-curve = SubResource( 10 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=6]
 direction = Vector3( 0, 1, 0 )
 spread = 60.0
 gravity = Vector3( 0, 5, 0 )
 initial_velocity = 3.0
 initial_velocity_random = 1.0
 linear_accel = 1.0
-scale_curve = SubResource( 11 )
-color_ramp = SubResource( 9 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="QuadMesh" id=13]
+[sub_resource type="QuadMesh" id=7]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
@@ -50,5 +50,6 @@ emitting = false
 amount = 32
 lifetime = 0.2
 one_shot = true
-process_material = SubResource( 12 )
-draw_pass_1 = SubResource( 13 )
+local_coords = false
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )

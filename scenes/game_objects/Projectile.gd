@@ -5,7 +5,7 @@ const ProjectileImpact = preload("res://scenes/game_objects/ProjectileImpact.tsc
 export var LIFE: float = 10.0
 export var DAMAGE: float = 1.0
 export var GRAVITY: float = 4.0
-export var HIT_TARGET_IN: float = 2
+export var HIT_TARGET_IN: float = 4
 
 onready var life: float = LIFE
 var velocity: Vector3 = Vector3(0.0, 0.0, 0.0)
@@ -24,19 +24,13 @@ func _process(delta: float) -> void:
 
 	var overlapping_entities = $Area.get_overlapping_bodies()
 	for body in overlapping_entities:
-		if body.is_in_group('enemy'):
-			body.take_damage(DAMAGE)
-			var impact_anim = ProjectileImpact.instance()
-			impact_anim.global_transform.origin = global_transform.origin
+		if body.is_in_group('enemy') or body.is_in_group('environment'):
+			if body.is_in_group('enemy'):
+				body.take_damage(DAMAGE)
 			var particles = get_tree().current_scene.get_node('Particles')
-			particles.add_child(impact_anim)
-			translation.y -= 10.0
-			return
-		if body.is_in_group('environment'):
 			var impact_anim = ProjectileImpact.instance()
-			impact_anim.global_transform.origin = global_transform.origin
-			var particles = get_tree().current_scene.get_node('Particles')
 			particles.add_child(impact_anim)
+			impact_anim.global_transform.origin = global_transform.origin
 			translation.y -= 10.0
 			return
 

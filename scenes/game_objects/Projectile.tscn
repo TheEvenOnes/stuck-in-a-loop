@@ -7,24 +7,24 @@
 [sub_resource type="SphereShape" id=1]
 radius = 0.4
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 0.764706, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0.311475 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=6]
 gravity = Vector3( 0, 0.1, 0 )
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=7]
 flags_transparent = true
 flags_unshaded = true
 flags_do_not_receive_shadows = true
@@ -35,8 +35,8 @@ params_billboard_keep_scale = true
 albedo_color = Color( 0.917647, 0.192157, 1, 0.501961 )
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="QuadMesh" id=2]
-material = SubResource( 6 )
+[sub_resource type="QuadMesh" id=8]
+material = SubResource( 7 )
 
 [node name="Projectile" type="Spatial"]
 script = ExtResource( 1 )
@@ -63,5 +63,5 @@ lifetime = 0.25
 explosiveness = 0.05
 fixed_fps = 60
 local_coords = false
-process_material = SubResource( 5 )
-draw_pass_1 = SubResource( 2 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 8 )
