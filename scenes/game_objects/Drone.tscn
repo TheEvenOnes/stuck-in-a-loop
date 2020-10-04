@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/game_objects/Shoot.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_objects/Patrol.gd" type="Script" id=2]
@@ -6,6 +6,20 @@
 [ext_resource path="res://scenes/game_objects/Tag.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/yugo_decal.png" type="Texture" id=5]
 [ext_resource path="res://assets/drone_basicl.png" type="Texture" id=6]
+[ext_resource path="res://assets/drone.png" type="Texture" id=7]
+
+[sub_resource type="SpatialMaterial" id=3]
+render_priority = 6
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
+albedo_texture = ExtResource( 7 )
 
 [sub_resource type="SphereShape" id=1]
 radius = 5.0
@@ -30,8 +44,12 @@ TEXTURE = ExtResource( 5 )
 
 [node name="Drone" type="Sprite3D" parent="Root"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-cast_shadow = 2
+layers = 2147483649
+material_override = SubResource( 3 )
+cast_shadow = 0
 billboard = 1
+double_sided = false
+alpha_cut = 1
 texture = ExtResource( 6 )
 
 [node name="Tasks" type="Spatial" parent="Root"]
