@@ -27,7 +27,7 @@ emission_operator = 0
 emission_on_uv2 = false
 uv1_scale = Vector3( 10, 10, 10 )
 
-[sub_resource type="ConcavePolygonShape" id=13]
+[sub_resource type="ConcavePolygonShape" id=4]
 data = PoolVector3Array( 40, 0, 40, -40, 0, 40, 40, 0, -40, -40, 0, 40, -40, 0, -40, 40, 0, -40 )
 
 [sub_resource type="CylinderMesh" id=5]
@@ -77,7 +77,7 @@ material/0 = SubResource( 3 )
 ]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Ground/StaticBody"]
-shape = SubResource( 13 )
+shape = SubResource( 4 )
 
 [node name="Pillar" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 0.893531, 0.104251, -0.436731, -0.0936616, 0.994551, 0.045779, 0.439124, 0, 0.898426, -4.39505, 0.132381, -2.15464 )
