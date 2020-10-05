@@ -27,13 +27,11 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="Sprite" type="AnimatedSprite3D" parent="Root"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174473, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.342589, 0 )
 pixel_size = 0.025
 billboard = 1
 frames = ExtResource( 4 )
 animation = "walk3"
-frame = 1
-playing = true
 
 [node name="OldSprite" type="Sprite3D" parent="Root"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
@@ -43,7 +41,7 @@ billboard = 1
 texture = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Root"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.22291, 0 )
 shape = SubResource( 1 )
 
 [node name="OmniLight" type="OmniLight" parent="Root"]
