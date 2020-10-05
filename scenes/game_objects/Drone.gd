@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	if cooldown <= 0.0:
 		cooldown = SCHEDULER_RESOLUTION
 		tasks[current_task_index].on_end()
-		current_task_index = (current_task_index + 1) % 2
+		current_task_index = (current_task_index + 1) % tasks.size()
 		tasks[current_task_index].on_start()
 
 	var delta_attenuated = delta

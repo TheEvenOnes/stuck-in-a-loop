@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/game_objects/Drone.gd"
 }, {
-"base": "KinematicBody",
+"base": "Position3D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://scenes/enemy.gd"
@@ -28,6 +28,11 @@ _global_script_classes=[ {
 "class": "EnemyExplosion",
 "language": "GDScript",
 "path": "res://scenes/game_objects/EnemyExplosion.gd"
+}, {
+"base": "Task",
+"class": "Mine",
+"language": "GDScript",
+"path": "res://scenes/tasks/Mine.gd"
 }, {
 "base": "Task",
 "class": "Move",
@@ -54,6 +59,7 @@ _global_script_class_icons={
 "Drone": "",
 "Enemy": "",
 "EnemyExplosion": "",
+"Mine": "",
 "Move": "",
 "Patrol": "",
 "Shoot": "",

@@ -1,10 +1,12 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Dummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game_objects/Drone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/PathControl.gd" type="Script" id=3]
+[ext_resource path="res://scenes/PoC Scene.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Citadel.gd" type="Script" id=5]
 [ext_resource path="res://assets/citadel.png" type="Texture" id=6]
+[ext_resource path="res://assets/crystal.png" type="Texture" id=7]
 [ext_resource path="res://materials/glowing_crystal.tres" type="Material" id=8]
 [ext_resource path="res://scenes/DirectionalLight.gd" type="Script" id=11]
 
@@ -74,6 +76,36 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [node name="PoC Scene" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = -0.264862
+margin_top = 2.0
+margin_right = 219.735
+margin_bottom = 71.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control"]
+position = Vector2( 33.5842, 36.7518 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="Control"]
+margin_left = 61.5943
+margin_top = 21.1352
+margin_right = 156.594
+margin_bottom = 47.1352
+rect_scale = Vector2( 1.5, 1.5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 4
+text = "200.00"
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Navigation" type="Navigation" parent="."]
 
@@ -265,8 +297,9 @@ light_bake_mode = 2
 [node name="ProjectileBucket" type="Position3D" parent="Citadel"]
 
 [node name="Control" type="Control" parent="Citadel"]
+margin_top = 153.622
 margin_right = 299.0
-margin_bottom = 119.0
+margin_bottom = 272.622
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -279,9 +312,9 @@ __meta__ = {
 }
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -0.121525, 0.369124, 0.917576, -0.129937, -0.925972, 0.354531, 0.979568, -0.0762703, 0.160466, 0, 4.79984, 0 )
+transform = Transform( 0.554583, 0.226893, 0.794538, -0.129937, -0.925972, 0.354531, 0.815223, -0.300804, -0.484592, 0, 4.79984, 0 )
 light_color = Color( 0.835294, 0.835294, 0.835294, 1 )
-light_energy = 0.000120476
+light_energy = 0.10411
 light_indirect_energy = 2.0
 light_specular = 0.0
 light_bake_mode = 2
