@@ -111,6 +111,8 @@ left_click={
 3d_physics/layer_1="environment"
 3d_physics/layer_2="enemy"
 3d_physics/layer_3="drone"
+3d_physics/layer_4="projectile"
+3d_physics/layer_5="projectile_enemy"
 
 [rendering]
 

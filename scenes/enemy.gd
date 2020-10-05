@@ -113,6 +113,11 @@ func ai_decision() -> void:
 				ai_decision_idle()
 				return
 
+			var nearby_targets: Array = find_nearby_targets()
+			if nearby_targets and nearby_targets.size() > 0:
+				ai_decision_shoot(nearby_targets)
+				return
+
 			# Despite moving already, re-plan the move.
 			ai_decision_move()
 
@@ -126,6 +131,16 @@ func ai_decision() -> void:
 			if idle_task.sleep_time <= 0:
 				ai_decision_move()
 
+
+func find_nearby_targets() -> Array:
+	var tgt: Array = []
+	var overlapping_entities = $'Root/TargetRange'.get_overlapping_bodies()
+	for body in overlapping_entities:
+		if (body.is_in_group('drone') and
+			body.global_transform.origin.distance_to_squared(self.global_transform.origin) < 5):
+			continue
+		pass
+	return tgt
 
 func ai_decision_idle() -> void:
 	# Start idling.
@@ -150,6 +165,10 @@ func ai_decision_move() -> void:
 		active_task.stamina = STAMINA
 	state = EnemyState.Moving
 
+
+func ai_decision_shoot(targets: Array):
+	
+	pass
 
 func _on_Move_exhausted():
 	ai_decision()

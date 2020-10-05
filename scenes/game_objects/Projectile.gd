@@ -28,14 +28,21 @@ func _physics_process(delta: float) -> void:
 		# Already exploded; don't explode again.
 		return
 
+	# This script is shared for friendly and enemy projectiles.
+	# Enemy projectiles hurt friendlies; friendly projectiles hurt enemies.
+	var hurtable_group: String = 'enemy'
+	if self.name == 'ProjectileEnemy':
+		hurtable_group = 'friendly'
+
 	var overlapping_entities = $Area.get_overlapping_bodies()
 
 	var end_projectile: bool = false
 	for body in overlapping_entities:
-		if body.is_in_group('enemy') or body.is_in_group('environment'):
-			if body.is_in_group('enemy') && body.get_parent().has_method('take_damage') != null:
+		if body.is_in_group(hurtable_group) or body.is_in_group('environment'):
+			if body.is_in_group(hurtable_group) && body.get_parent().has_method('take_damage') != null:
 				body.get_parent().take_damage(DAMAGE)
 			end_projectile = true
+
 	if end_projectile:
 		var particles = get_tree().current_scene.get_node('Particles')
 		var impact_anim = ProjectileImpact.instance()
