@@ -9,6 +9,7 @@ export var PROJECTILE_LATERAL_SPEED: float = 4.0
 onready var life: float = LIFE
 var velocity: Vector3 = Vector3(0.0, 0.0, 0.0)
 var gravity: float = 0.0
+var dead: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,6 +23,10 @@ func _physics_process(delta: float) -> void:
 		return
 
 	$Sprite3D.scale = Vector3(1, 1, 1) * (0.5 + 0.25 * sin(life * 25.0))
+
+	if dead:
+		# Already exploded; don't explode again.
+		return
 
 	var overlapping_entities = $Area.get_overlapping_bodies()
 
@@ -37,7 +42,8 @@ func _physics_process(delta: float) -> void:
 		particles.add_child(impact_anim)
 		impact_anim.global_transform.origin = global_transform.origin
 		translation.y -= 10.0
-		queue_free()
+		dead = true
+		life = 0.2
 		return
 
 	velocity.y -= delta * gravity
