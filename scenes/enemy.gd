@@ -14,6 +14,7 @@ var path: PoolVector3Array
 var path_offset: float = 0
 var dead_remove_ttl: float = INF
 const EnemyExplosion = preload("res://scenes/game_objects/EnemyExplosion.tscn")
+var velocity: Vector3 = Vector3.ZERO
 
 func take_damage(damage: float) -> void:
 	if !is_inf(dead_remove_ttl):
@@ -79,6 +80,7 @@ func navpath_move(delta: float) -> void:
 		var diff: Vector3 = pt_b - pt_a  # Total direction vector.
 		diff *= progress_in_segment      # We need only 'path traveled so far'.
 		var pt: Vector3 = pt_a + diff    # Find new location on the segment.
+		velocity = (pt - global_transform.origin) / delta
 		self.global_transform.origin = pt
 
 func find_segment_for_offset(path: PoolVector3Array, path_offset: float) -> Dictionary:

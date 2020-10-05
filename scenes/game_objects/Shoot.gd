@@ -14,9 +14,7 @@ onready var sensors: Area = $Area
 func _ready() -> void:
 	sensors_collider.shape.radius = RANGE
 
-func update(delta: float, delta_attenuated: float, _patrol_path: Path) -> void:
-	var drone = get_drone()
-
+func update(delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
 	cooldown -= delta
 	if cooldown <= 0.0:
 		cooldown = COOLDOWN
@@ -40,6 +38,10 @@ func shoot() -> void:
 				closest_distance = body_distance
 
 	if closest_enemy:
+		var velocity = Vector3.ZERO
+		if closest_enemy.get('velocity') != null:
+			velocity = closest_enemy.velocity
+
 		var projectile = Projectile.instance()
-		projectile.set_target(global_transform.origin + Vector3(0.0, 0.5, 0.0), closest_enemy.global_transform.origin)
+		projectile.set_target_with_lead(global_transform.origin, closest_enemy.global_transform.origin, velocity)
 		get_tree().current_scene.get_node('Projectiles').add_child(projectile)

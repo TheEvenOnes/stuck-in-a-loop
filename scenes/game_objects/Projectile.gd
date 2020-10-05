@@ -37,6 +37,59 @@ func _physics_process(delta: float) -> void:
 	velocity.y -= delta * gravity
 	translation += velocity * delta
 
+func __solve_quadratic(a: float, b: float, c: float) -> Dictionary:
+	var s0 = NAN
+	var s1 = NAN
+
+	var p: float
+	var q: float
+	var D: float
+
+	# normal form: x^2 + px + q = 0
+	p = b / (2 * a);
+	q = c / a;
+
+	D = p * p - q;
+
+	if D == 0.0:
+		s0 = -p;
+		return { 'discriminant': 1, 's0': s0, 's1': s1 }
+	elif D < 0:
+		return { 'discriminant': 0, 's0': s0, 's1': s1 }
+	else:
+		var sqrt_D = sqrt(D)
+		s0 =  sqrt_D - p
+		s1 = -sqrt_D - p
+		return { 'discriminant': 2, 's0': s0, 's1': s1 }
+
+func lead_target(from: Vector3, target: Vector3, target_velocity: Vector3) -> Dictionary:
+	var vx: float = PROJECTILE_LATERAL_SPEED
+	var target_vel_xz: Vector3 = target_velocity
+	target_vel_xz.y = 0
+	var diff_xz = target - from
+	diff_xz.y = 0
+
+	var c0: float = target_vel_xz.dot(target_vel_xz) - vx * vx
+	var c1: float = 2.0 * diff_xz.dot(target_vel_xz)
+	var c2: float = diff_xz.dot(diff_xz)
+
+	var result = __solve_quadratic(c0, c1, c2)
+
+	var valid0: bool = result.discriminant > 0 && result.s0 > 0;
+	var valid1: bool = result.discriminant > 1 && result.s1 > 0;
+
+	var t: float
+	if !valid0 && !valid1:
+		return { 'valid': false }
+	elif valid0 && valid1:
+		t = min(result.s0, result.s1)
+	else:
+		t = result.s0 if valid0 else result.s1
+
+	var impact_point = target + target_velocity * t
+
+	return { 'valid': true, 'impact_point': impact_point }
+
 func set_target(from: Vector3, to: Vector3) -> void:
 	global_transform.origin = from
 	var local_to = to - from
@@ -47,7 +100,7 @@ func set_target(from: Vector3, to: Vector3) -> void:
 	var vx = PROJECTILE_LATERAL_SPEED
 	var t = l / vx
 	var y_peak = l * 0.25 + 0.5 * (local_to.y)
-	var y_end = local_to.y - 0.5
+	var y_end = local_to.y
 	var y0 = 0.0
 	var g = -4.0 * (y0 - 2.0 * y_peak + y_end) / (t * t)
 	var vy = -(3.0 * y0 - 4.0 * y_peak + y_end) / t
@@ -56,3 +109,10 @@ func set_target(from: Vector3, to: Vector3) -> void:
 	velocity.y = vy
 
 	gravity = g
+
+func set_target_with_lead(from: Vector3, to: Vector3, velocity: Vector3) -> void:
+	var res = lead_target(from, to, velocity)
+	if res.valid:
+		set_target(from, res.impact_point)
+	else:
+		print_debug('Impossible target')
