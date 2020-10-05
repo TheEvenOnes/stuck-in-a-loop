@@ -40,7 +40,6 @@ material = SubResource( 7 )
 
 [node name="Projectile" type="Spatial"]
 script = ExtResource( 1 )
-PROJECTILE_LATERAL_SPEED = 4.0
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 2

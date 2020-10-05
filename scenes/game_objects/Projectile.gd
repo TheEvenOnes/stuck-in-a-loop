@@ -25,8 +25,8 @@ func _physics_process(delta: float) -> void:
 	var overlapping_entities = $Area.get_overlapping_bodies()
 	for body in overlapping_entities:
 		if body.is_in_group('enemy') or body.is_in_group('environment'):
-			if body.is_in_group('enemy'):
-				body.take_damage(DAMAGE)
+			if body.is_in_group('enemy') && body.get_parent().get('take_damage') != null:
+				body.get_parent().take_damage(DAMAGE)
 			var particles = get_tree().current_scene.get_node('Particles')
 			var impact_anim = ProjectileImpact.instance()
 			particles.add_child(impact_anim)

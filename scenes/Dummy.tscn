@@ -14,13 +14,13 @@ height = 0.2
 gradient = SubResource( 2 )
 width = 15
 
-[node name="Dummy" type="Position3D" groups=[
-"enemy",
-]]
+[node name="Dummy" type="Position3D"]
 script = ExtResource( 1 )
 SPEED = 1.0
 
-[node name="Root" type="KinematicBody" parent="."]
+[node name="Root" type="KinematicBody" parent="." groups=[
+"enemy",
+]]
 collision_layer = 7
 collision_mask = 7
 
