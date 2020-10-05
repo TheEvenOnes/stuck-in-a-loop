@@ -1,8 +1,8 @@
-extends ColorRect
+extends CanvasLayer
 
 export(String, FILE, "*.tscn") var next_scene_path
 
-onready var _anim_player := $AnimationPlayer
+onready var _anim_player := $ColorRect/AnimationPlayer
 
 #func _ready() -> void:
 #	_anim_player.play("Fade")
