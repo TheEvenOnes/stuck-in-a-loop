@@ -28,6 +28,11 @@ func shoot() -> void:
 	var closest_enemy: Spatial = null
 	var closest_distance: float = 0
 	for body in enemies_in_range:
+		if body as Enemy == null:
+			body = body.get_parent()
+		if body as Enemy == null:
+			print("WARNING: Skipping non-enemy found in in sensors.get_overlapping_bodies.")
+			continue
 		if closest_enemy == null:
 			closest_enemy = body
 			closest_distance = closest_enemy.global_transform.origin.distance_squared_to(global_transform.origin)
