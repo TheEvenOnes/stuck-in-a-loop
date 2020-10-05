@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/tasks/Mine.gd" type="Script" id=1]
 [ext_resource path="res://assets/splat.png" type="Texture" id=2]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=8]
 flags_transparent = true
 flags_do_not_receive_shadows = true
 vertex_color_use_as_albedo = true
@@ -46,9 +46,10 @@ color_ramp = SubResource( 3 )
 
 [node name="Mine" type="Spatial"]
 script = ExtResource( 1 )
+MINING_SPEED = 100.0
 
 [node name="Particles" type="Particles" parent="."]
-material_override = SubResource( 1 )
+material_override = SubResource( 8 )
 cast_shadow = 0
 emitting = false
 amount = 64

@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/tasks/Idle.gd"
 }, {
+"base": "Spatial",
+"class": "LevelState",
+"language": "GDScript",
+"path": "res://scenes/PoC Scene.gd"
+}, {
 "base": "Task",
 "class": "Mine",
 "language": "GDScript",
@@ -70,6 +75,7 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyExplosion": "",
 "Idle": "",
+"LevelState": "",
 "Mine": "",
 "Move": "",
 "Patrol": "",

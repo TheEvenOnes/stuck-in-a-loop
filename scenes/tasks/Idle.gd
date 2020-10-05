@@ -5,7 +5,7 @@ var sleep_time: float = 5
 
 signal wake
 
-func update(delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
+func update(delta: float, _delta_attenuated: float) -> void:
 	get_task_owner().velocity = Vector3.ZERO
 	sleep_time -= delta
 	if sleep_time < 0:

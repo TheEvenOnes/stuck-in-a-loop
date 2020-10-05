@@ -3,7 +3,7 @@ class_name Mine
 
 export var MINING_SPEED: float = 5.0
 
-func update(_delta: float, delta_attenuated: float, _patrol_path: Path) -> void:
+func update(_delta: float, delta_attenuated: float) -> void:
 	mine(delta_attenuated)
 
 func mine(delta_attenuated) -> void:

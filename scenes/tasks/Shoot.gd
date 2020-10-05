@@ -14,7 +14,7 @@ onready var sensors: Area = $Area
 func _ready() -> void:
 	sensors_collider.shape.radius = RANGE
 
-func update(delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
+func update(delta: float, _delta_attenuated: float) -> void:
 	cooldown -= delta
 	if cooldown <= 0.0:
 		cooldown = COOLDOWN

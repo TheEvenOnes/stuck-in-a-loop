@@ -1,7 +1,6 @@
 [gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/Dummy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/game_objects/Drone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/PathControl.gd" type="Script" id=3]
 [ext_resource path="res://scenes/PoC Scene.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Citadel.gd" type="Script" id=5]
@@ -9,6 +8,7 @@
 [ext_resource path="res://assets/crystal.png" type="Texture" id=7]
 [ext_resource path="res://materials/glowing_crystal.tres" type="Material" id=8]
 [ext_resource path="res://scenes/game_objects/Spawner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/tasks/Slot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/DirectionalLight.gd" type="Script" id=11]
 
 [sub_resource type="NavigationMesh" id=1]
@@ -88,12 +88,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Control"]
+[node name="HUD" type="Control" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control/HUD"]
 position = Vector2( 33.5842, 36.7518 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Control/HUD"]
 margin_left = 61.5943
 margin_top = 21.1352
 margin_right = 156.594
@@ -107,6 +114,51 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NextIn" type="Label" parent="Control/HUD"]
+margin_left = 26.5199
+margin_top = 62.5198
+margin_right = 319.52
+margin_bottom = 88.5198
+rect_scale = Vector2( 1.5, 1.5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 4
+text = "Next drone in 100"
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prepare" type="Control" parent="Control"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuySlot" type="Button" parent="Control/Prepare"]
+margin_left = 977.373
+margin_top = 857.675
+margin_right = 1041.37
+margin_bottom = 906.675
+text = "Buy Slot"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DronePreview" type="TabContainer" parent="Control/Prepare"]
+margin_left = 753.957
+margin_top = 308.005
+margin_right = 1265.96
+margin_bottom = 820.005
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot" parent="Control/Prepare/DronePreview" instance=ExtResource( 10 )]
 
 [node name="Navigation" type="Navigation" parent="."]
 
@@ -264,10 +316,6 @@ shape = SubResource( 10 )
 
 [node name="Drones" type="Spatial" parent="."]
 
-[node name="Drone" parent="Drones" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155286, 2.5096 )
-PATROL_PATH = NodePath("../../PathControl/Path")
-
 [node name="Citadel" type="StaticBody" parent="."]
 script = ExtResource( 5 )
 
@@ -306,16 +354,18 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Citadel/Control"]
-margin_right = 120.0
-margin_bottom = 19.0
+margin_left = 1767.74
+margin_top = -124.783
+margin_right = 1887.74
+margin_bottom = -105.783
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.554583, 0.226893, 0.794538, -0.129937, -0.925972, 0.354531, 0.815223, -0.300804, -0.484592, 0, 4.79984, 0 )
+transform = Transform( -0.107715, -0.341075, -0.926805, -0.129937, -0.925972, 0.354531, -0.977051, 0.159314, 0.0557597, 0, 4.79984, 0 )
 light_color = Color( 0.835294, 0.835294, 0.835294, 1 )
-light_energy = 0.10411
+light_energy = 0.14998
 light_indirect_energy = 2.0
 light_specular = 0.0
 light_bake_mode = 2
@@ -336,11 +386,9 @@ TARGET = NodePath("../../Citadel")
 [node name="Particles" type="Spatial" parent="."]
 
 [node name="PathControl" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040923, 0 )
 script = ExtResource( 3 )
 
 [node name="Path" type="Path" parent="PathControl"]
-transform = Transform( 1, 0.00055326, -0.000723997, -0.000554766, 0.999998, -0.00209677, 0.000722845, 0.00209716, 0.999998, 0, 0, 0 )
 curve = SubResource( 12 )
 
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="PathControl"]

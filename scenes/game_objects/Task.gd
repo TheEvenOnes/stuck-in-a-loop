@@ -7,11 +7,11 @@ func on_start() -> void:
 func on_end() -> void:
 	pass
 
-func get_drone() -> Drone:
-	return get_node('../../../') as Drone
+func get_drone():
+	return get_node('../../../')
 
 func get_task_owner() -> Position3D:
 	return get_node('../../../') as Position3D
 
-func update(_delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
+func update(_delta: float, _delta_attenuated: float) -> void:
 	pass

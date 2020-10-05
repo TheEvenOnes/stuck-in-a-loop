@@ -35,7 +35,7 @@ func wobble(path: PoolVector3Array, amount: float) -> PoolVector3Array:
 
 # NOTE: Patrol path is unused, because this task specifically uses navmesh
 # for movement.
-func update(delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
+func update(delta: float, _delta_attenuated: float) -> void:
 	if delta == 0:
 		return
 	if active_path == null:

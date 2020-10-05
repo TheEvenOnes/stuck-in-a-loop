@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 		ai_decision()
 		ai_decision_timeout += AI_DECISION_TIMEOUT
 
-	active_task.update(delta, delta, null)
+	active_task.update(delta, delta)
 
 	if velocity.length() > 0.001:
 		var cam: Camera = get_viewport().get_camera() as Camera
@@ -101,7 +101,7 @@ func ai_decision() -> void:
 				# Exhausted. Rest a bit.
 				ai_decision_idle()
 				return
-			
+
 			# Despite moving already, re-plan the move.
 			ai_decision_move()
 
