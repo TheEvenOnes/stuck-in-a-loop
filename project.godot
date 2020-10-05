@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://scenes/tasks/Shoot.gd"
 }, {
 "base": "Spatial",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://scenes/game_objects/Spawner.gd"
+}, {
+"base": "Spatial",
 "class": "Task",
 "language": "GDScript",
 "path": "res://scenes/game_objects/Task.gd"
@@ -69,6 +74,7 @@ _global_script_class_icons={
 "Move": "",
 "Patrol": "",
 "Shoot": "",
+"Spawner": "",
 "Task": ""
 }
 

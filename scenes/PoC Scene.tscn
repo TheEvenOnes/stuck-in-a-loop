@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/Dummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game_objects/Drone.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/citadel.png" type="Texture" id=6]
 [ext_resource path="res://assets/crystal.png" type="Texture" id=7]
 [ext_resource path="res://materials/glowing_crystal.tres" type="Material" id=8]
+[ext_resource path="res://scenes/game_objects/Spawner.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/DirectionalLight.gd" type="Script" id=11]
 
 [sub_resource type="NavigationMesh" id=1]
@@ -345,3 +346,23 @@ curve = SubResource( 12 )
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="PathControl"]
 material_override = SubResource( 13 )
 cast_shadow = 0
+
+[node name="Spawner" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.843, 0.301, 0 )
+TARGET = NodePath("../Citadel")
+NAV_MESH = NodePath("../Navigation")
+
+[node name="Spawner2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.241, 0.301, 0 )
+TARGET = NodePath("../Citadel")
+NAV_MESH = NodePath("../Navigation")
+
+[node name="Spawner3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.287, 0.301, 9.497 )
+TARGET = NodePath("../Citadel")
+NAV_MESH = NodePath("../Navigation")
+
+[node name="Spawner4" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.287, 0.301, -19.424 )
+TARGET = NodePath("../Citadel")
+NAV_MESH = NodePath("../Navigation")
