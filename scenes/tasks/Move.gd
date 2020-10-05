@@ -6,6 +6,8 @@ var active_path: PoolVector3Array
 var current_path_offset: float = 0
 var stamina: float
 
+var rng = RandomNumberGenerator.new()
+
 signal exhausted
 
 func move(nav_mesh: Navigation, new_target: Node, new_speed: float) -> void:
@@ -15,6 +17,13 @@ func move(nav_mesh: Navigation, new_target: Node, new_speed: float) -> void:
 		nav_mesh.get_closest_point(owner.global_transform.origin),
 		new_target.global_transform.origin,
 		true)
+
+	# Wobble a bit.
+	for idx in range(1, path.size()):
+		path.set(idx, Vector3(	path[idx].x + rng.randf_range(-0.1, 0.1),
+								path[idx].y,
+								path[idx].z + rng.randf_range(-0.1, 0.1)))
+
 	active_path = path
 	current_path_offset = 0
 
