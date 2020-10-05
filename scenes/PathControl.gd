@@ -4,6 +4,8 @@ extends Spatial
 onready var path: Path = $Path
 onready var geometry: ImmediateGeometry = $ImmediateGeometry
 
+var SUBS = 128.0
+
 func _process(_delta: float) -> void:
 	if path == null:
 		return
@@ -13,7 +15,7 @@ func _process(_delta: float) -> void:
 	if l <= 0.1:
 		return
 
-	var step = l / 64.0
+	var step = l / SUBS
 	geometry.clear()
 
 
@@ -32,7 +34,7 @@ func _process(_delta: float) -> void:
 		geometry.add_vertex(end)
 		geometry.add_vertex(end)
 		geometry.end()
-		t += l * 0.2
+		t += l * 0.1
 
 	geometry.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	t = 0.0

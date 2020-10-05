@@ -42,8 +42,9 @@ func get_tasks() -> Array:
 
 func _process(delta: float) -> void:
 	if state == State.Rally:
-		var path = get_tree().get_current_scene().get_node('PathControl/Path')
-		var target: Vector3 = path.get_curve().interpolate_baked(0.0, true) + Vector3(0.0, 0.2, 0.0)
+		var path: Path = get_tree().get_current_scene().get_node('PathControl/Path')
+		var l = path.get_curve().get_baked_length()
+		var target: Vector3 = path.get_curve().interpolate_baked(PHASE_OFFSET * l, true) + Vector3(0.0, 0.2, 0.0)
 		if target.distance_to(global_transform.origin) < 0.05:
 			state = State.Operate
 		global_transform.origin = global_transform.origin.linear_interpolate(target, 0.05)

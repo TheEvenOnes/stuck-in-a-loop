@@ -15,7 +15,13 @@ const MINE = { 'blueprint': preload('res://scenes/tasks/Mine.tscn'), 'name': 'Mi
 
 onready var drones: Array = [{
 	'sprite': 'res://assets/drone_basicl.png',
+	'tasks': [PATROL, SHOOT, SHOOT]
+}, {
+	'sprite': 'res://assets/drone_basicl.png',
 	'tasks': [PATROL, SHOOT, MINE]
+}, {
+	'sprite': 'res://assets/drone_basicl.png',
+	'tasks': [PATROL, SHOOT, SHOOT]
 }]
 
 enum SceneState {
