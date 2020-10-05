@@ -19,13 +19,18 @@ func move(nav_mesh: Navigation, new_target: Node, new_speed: float) -> void:
 		true)
 
 	# Wobble a bit.
-	for idx in range(1, path.size()):
-		path.set(idx, Vector3(	path[idx].x + rng.randf_range(-0.1, 0.1),
-								path[idx].y,
-								path[idx].z + rng.randf_range(-0.1, 0.1)))
+	path = wobble(path, 0.5)
 
 	active_path = path
 	current_path_offset = 0
+
+
+func wobble(path: PoolVector3Array, amount: float) -> PoolVector3Array:
+	for idx in range(1, path.size()):
+		path.set(idx, Vector3(	path[idx].x + rng.randf_range(-amount, amount),
+								path[idx].y,
+								path[idx].z + rng.randf_range(-amount, amount)))
+	return path
 
 
 # NOTE: Patrol path is unused, because this task specifically uses navmesh
