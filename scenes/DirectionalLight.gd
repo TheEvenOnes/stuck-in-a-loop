@@ -1,4 +1,3 @@
-tool
 extends DirectionalLight
 
 export var ANGULAR_SPEED: float = 0.05
