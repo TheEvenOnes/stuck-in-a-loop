@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/drone.png" type="Texture" id=2]
+[ext_resource path="res://scenes/tasks/Move.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.2
@@ -13,25 +14,27 @@ height = 0.2
 gradient = SubResource( 2 )
 width = 15
 
-[node name="Dummy" type="KinematicBody" groups=[
+[node name="Dummy" type="Position3D" groups=[
 "enemy",
 ]]
-collision_layer = 7
-collision_mask = 7
 script = ExtResource( 1 )
 SPEED = 1.0
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Root" type="KinematicBody" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite3D" type="Sprite3D" parent="Root"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 pixel_size = 0.02
 billboard = 1
 texture = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="Root"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="OmniLight" type="OmniLight" parent="."]
+[node name="OmniLight" type="OmniLight" parent="Root"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302097, 0 )
 light_color = Color( 0.988235, 0.0235294, 0.0235294, 1 )
 light_energy = 1.33
@@ -40,8 +43,13 @@ light_specular = 0.0
 omni_range = 2.0
 omni_attenuation = 0.535888
 
-[node name="Healthbar" type="Sprite3D" parent="."]
+[node name="Healthbar" type="Sprite3D" parent="Root"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 pixel_size = 0.1
 billboard = 1
 texture = SubResource( 3 )
+
+[node name="Tasks" type="Spatial" parent="Root"]
+
+[node name="Move" type="Spatial" parent="Root/Tasks"]
+script = ExtResource( 3 )
