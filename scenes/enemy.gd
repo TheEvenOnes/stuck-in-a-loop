@@ -5,7 +5,7 @@ export var HEALTH: float = 4.0               # default health
 export var AI_DECISION_TIMEOUT: float = 0.5  # how often are decisions made
 export var NAV_MESH: NodePath                # a Navigation used for pathfinding
 export var TARGET: NodePath                  # a Node used as target for pathfinding
-export var SPEED: float = 3
+export var SPEED: float = 5
 export var STAMINA: float = 10
 
 onready var health: float = HEALTH

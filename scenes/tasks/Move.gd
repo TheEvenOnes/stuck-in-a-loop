@@ -19,7 +19,7 @@ func move(nav_mesh: Navigation, new_target: Node, new_speed: float) -> void:
 		true)
 
 	# Wobble a bit.
-	path = wobble(path, 0.5)
+	path = wobble(path, 0.1)
 
 	active_path = path
 	current_path_offset = 0
