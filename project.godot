@@ -32,12 +32,12 @@ _global_script_classes=[ {
 "base": "Task",
 "class": "Patrol",
 "language": "GDScript",
-"path": "res://scenes/game_objects/Patrol.gd"
+"path": "res://scenes/tasks/Patrol.gd"
 }, {
 "base": "Task",
 "class": "Shoot",
 "language": "GDScript",
-"path": "res://scenes/game_objects/Shoot.gd"
+"path": "res://scenes/tasks/Shoot.gd"
 }, {
 "base": "Spatial",
 "class": "Task",

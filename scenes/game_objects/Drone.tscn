@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scenes/game_objects/Shoot.gd" type="Script" id=1]
-[ext_resource path="res://scenes/game_objects/Patrol.gd" type="Script" id=2]
+[ext_resource path="res://scenes/tasks/Shoot.gd" type="Script" id=1]
+[ext_resource path="res://scenes/tasks/Patrol.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game_objects/Drone.gd" type="Script" id=3]
 [ext_resource path="res://scenes/game_objects/Tag.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/yugo_decal.png" type="Texture" id=5]
