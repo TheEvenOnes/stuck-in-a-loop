@@ -1,11 +1,12 @@
 extends Task
 class_name Move
 
-export(bool) var ENABLED: bool = true
-
 var speed: float
 var active_path: PoolVector3Array
 var current_path_offset: float = 0
+var stamina: float
+
+signal exhausted
 
 func move(nav_mesh: Navigation, new_target: Node, new_speed: float) -> void:
 	var owner: Position3D = get_task_owner()
@@ -17,6 +18,7 @@ func move(nav_mesh: Navigation, new_target: Node, new_speed: float) -> void:
 	active_path = path
 	current_path_offset = 0
 
+
 # NOTE: Patrol path is unused, because this task specifically uses navmesh
 # for movement.
 func update(delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
@@ -26,6 +28,10 @@ func update(delta: float, _delta_attenuated: float, _patrol_path: Path) -> void:
 		return
 	var owner: Position3D = get_task_owner()
 	assert(owner != null)
+
+	stamina -= delta
+	if stamina < 0:
+		emit_signal("exhausted")
 
 	# Move along the path.
 	current_path_offset += delta * speed
