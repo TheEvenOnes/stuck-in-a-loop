@@ -6,12 +6,14 @@ export var AI_DECISION_TIMEOUT: float = 0.5  # how often are decisions made
 export var NAV_MESH: NodePath                # a Navigation used for pathfinding
 export var TARGET: NodePath                  # a Node used as target for pathfinding
 export var SPEED: float = 3
+export var STAMINA: float = 10
 
 onready var health: float = HEALTH
 onready var ai_decision_timeout: float = AI_DECISION_TIMEOUT
 var dead_remove_ttl: float = INF
 const EnemyExplosion = preload("res://scenes/game_objects/EnemyExplosion.tscn")
 var velocity: Vector3 = Vector3.ZERO
+var dir: int
 
 onready var active_task: Task = $'Root/Tasks/Move'
 var state: int = EnemyState.Idle
@@ -23,6 +25,10 @@ enum EnemyState {
 	Moving = 1,
 	Shooting = 2,
 }
+
+func _ready():
+	rng.randomize()
+	$Root/Sprite.playing = false
 
 func take_damage(damage: float) -> void:
 	if !is_inf(dead_remove_ttl):
@@ -50,6 +56,31 @@ func _process(delta: float) -> void:
 		ai_decision_timeout += AI_DECISION_TIMEOUT
 
 	active_task.update(delta, delta, null)
+
+	if velocity.length() > 0.001:
+		var cam: Camera = get_viewport().get_camera() as Camera
+		var ray: Vector3 = global_transform.origin.direction_to(cam.get_camera_transform().origin)
+
+		var angle_to_cam: float = velocity.angle_to(Vector3.RIGHT) * 180 / PI
+		if angle_to_cam >= 315 or angle_to_cam < 45:
+			dir = 0
+		elif angle_to_cam >= 45 and angle_to_cam < 135:
+			if velocity.z > 0:
+				dir = 3
+			else:
+				dir = 1
+		elif angle_to_cam >= 135 and angle_to_cam < 225:
+			dir = 2
+		else:
+			dir = 3
+
+	match state:
+		EnemyState.Idle:
+			$Root/Sprite.animation = 'idle' + String(dir)
+		EnemyState.Moving:
+			$Root/Sprite.animation = 'walk' + String(dir)
+		EnemyState.Shooting:
+			$Root/Sprite.animation = 'walk' + String(dir)
 
 
 func ai_decision() -> void:
@@ -100,7 +131,7 @@ func ai_decision_move() -> void:
 	active_task.move(navmesh, target, SPEED)
 	if state != EnemyState.Moving:
 		# We are just starting to move, we were not already moving.
-		active_task.stamina = 5
+		active_task.stamina = STAMINA
 	state = EnemyState.Moving
 
 
