@@ -30,7 +30,7 @@ enum EnemyState {
 
 func _ready():
 	rng.randomize()
-	$Root/Sprite.playing = false
+	$Root/Sprite.playing = true
 
 func take_damage(damage: float) -> void:
 	if !is_inf(dead_remove_ttl):
@@ -86,7 +86,6 @@ func _process(delta: float) -> void:
 			$Root/Sprite.frames.set_animation_speed('walk' + String(dir), SPEED * 15)
 		EnemyState.Shooting:
 			$Root/Sprite.animation = 'walk' + String(dir)
-	$Root/Sprite.playing = true
 
 
 func ai_decision() -> void:
