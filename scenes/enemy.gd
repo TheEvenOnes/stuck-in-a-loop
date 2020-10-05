@@ -20,6 +20,8 @@ var state: int = EnemyState.Idle
 
 var rng = RandomNumberGenerator.new()
 
+onready var healthbar_max_size: Vector3 = $Root/Healthbar.scale
+
 enum EnemyState {
 	Idle = 0,
 	Moving = 1,
@@ -35,6 +37,7 @@ func take_damage(damage: float) -> void:
 		return
 
 	health -= damage
+	$Root/Healthbar.scale.x = healthbar_max_size.x * health / HEALTH
 	if health <= 0.0:
 		var enemy_explosion = EnemyExplosion.instance()
 		get_tree().current_scene.get_node('Particles').add_child(enemy_explosion)
