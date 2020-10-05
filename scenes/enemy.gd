@@ -12,6 +12,7 @@ onready var health: float = HEALTH
 onready var ai_decision_timeout: float = AI_DECISION_TIMEOUT
 var dead_remove_ttl: float = INF
 const EnemyExplosion = preload("res://scenes/game_objects/EnemyExplosion.tscn")
+const SpawnSound: AudioStreamOGGVorbis = preload("res://sounds/explode.ogg")
 var velocity: Vector3 = Vector3.ZERO
 var dir: int
 
@@ -31,6 +32,16 @@ enum EnemyState {
 func _ready():
 	rng.randomize()
 	$Root/Sprite.playing = true
+
+	$Root/Particles.emitting = true
+
+	SpawnSound.set_loop(false)
+	var ap = AudioStreamPlayer3D.new()
+	ap.stream = SpawnSound
+	add_child(ap)
+	ap.global_transform.origin = global_transform.origin
+	ap.play()
+
 
 func take_damage(damage: float) -> void:
 	if !is_inf(dead_remove_ttl):

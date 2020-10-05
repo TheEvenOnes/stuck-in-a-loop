@@ -19,6 +19,7 @@ func _ready():
 	var ap = AudioStreamPlayer3D.new()
 	ap.stream = snd
 	add_child(ap)
+	ap.global_transform.origin = global_transform.origin
 	ap.play()
 
 func set_emitting(newval: bool) -> void:
