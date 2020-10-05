@@ -13,8 +13,8 @@ var dead: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Sound.play()
-	$Sound.get_stream().set_loop(false)
+	$Launch.play()
+	$Launch.get_stream().set_loop(false)
 
 func _physics_process(delta: float) -> void:
 	life -= delta
@@ -43,7 +43,9 @@ func _physics_process(delta: float) -> void:
 		impact_anim.global_transform.origin = global_transform.origin
 		translation.y -= 10.0
 		dead = true
-		life = 0.2
+		life = 0.5 # Matches duration of the boom sound
+		$Boom.play()
+		$Boom.get_stream().set_loop(false)
 		return
 
 	velocity.y -= delta * gravity

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game_objects/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://materials/projectile.tres" type="Material" id=2]
 [ext_resource path="res://assets/splat.png" type="Texture" id=3]
 [ext_resource path="res://sounds/pew.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sounds/boom.ogg" type="AudioStream" id=5]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.1
@@ -66,5 +67,8 @@ local_coords = false
 process_material = SubResource( 6 )
 draw_pass_1 = SubResource( 8 )
 
-[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+[node name="Launch" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )
+
+[node name="Boom" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 5 )
