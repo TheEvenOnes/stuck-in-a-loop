@@ -69,7 +69,8 @@ func _process(delta: float) -> void:
 		ai_decision()
 		ai_decision_timeout += AI_DECISION_TIMEOUT
 
-	active_task.update(delta, delta)
+	if active_task != null:
+		active_task.update(delta, delta)
 
 	if velocity.length() > 0.001:
 		var cam: Camera = get_viewport().get_camera() as Camera
@@ -96,7 +97,7 @@ func _process(delta: float) -> void:
 			# ??? This might be setting global property. Fix.
 			$Root/Sprite.frames.set_animation_speed('walk' + String(dir), SPEED * 15)
 		EnemyState.Shooting:
-			$Root/Sprite.animation = 'walk' + String(dir)
+			$Root/Sprite.animation = 'shoot' + String(dir)
 
 
 func ai_decision() -> void:
@@ -137,9 +138,9 @@ func find_nearby_targets() -> Array:
 	var overlapping_entities = $'Root/TargetRange'.get_overlapping_bodies()
 	for body in overlapping_entities:
 		if (body.is_in_group('drone') and
-			body.global_transform.origin.distance_to_squared(self.global_transform.origin) < 5):
+			body.global_transform.origin.distance_to(self.global_transform.origin) < 10):
+			tgt.append(body)
 			continue
-		pass
 	return tgt
 
 func ai_decision_idle() -> void:
@@ -167,8 +168,18 @@ func ai_decision_move() -> void:
 
 
 func ai_decision_shoot(targets: Array):
-	
-	pass
+	if targets.size() == 0:
+		ai_decision_idle()
+		return
+
+	targets.sort_custom(self, '_compare_targets')
+	active_task = null # TODO: set it to $Root/Tasks/Shoot after teaching shoot to target friendlies
+	state = EnemyState.Shooting
+	velocity = Vector3.ZERO
+
+func _compare_targets(a, b):
+	return (a.global_transform.origin.distance_to(self.global_transform.origin)
+			< b.global_transform.origin.distance_to(self.global_transform.origin))
 
 func _on_Move_exhausted():
 	ai_decision()
