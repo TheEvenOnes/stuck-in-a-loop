@@ -87,8 +87,12 @@ _global_script_class_icons={
 [application]
 
 config/name="meh"
-run/main_scene="res://scenes/PoC Scene.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Transition="*res://scenes/Transition.tscn"
 
 [display]
 
