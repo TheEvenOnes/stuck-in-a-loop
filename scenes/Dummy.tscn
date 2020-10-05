@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/drone.png" type="Texture" id=2]
 [ext_resource path="res://scenes/tasks/Move.gd" type="Script" id=3]
+[ext_resource path="res://assets/enemy-0001.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.2
@@ -24,8 +25,18 @@ SPEED = 1.0
 collision_layer = 7
 collision_mask = 7
 
-[node name="Sprite3D" type="Sprite3D" parent="Root"]
+[node name="Sprite" type="AnimatedSprite3D" parent="Root"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174473, 0 )
+pixel_size = 0.025
+billboard = 1
+frames = ExtResource( 4 )
+animation = "walk3"
+frame = 1
+playing = true
+
+[node name="OldSprite" type="Sprite3D" parent="Root"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+visible = false
 pixel_size = 0.02
 billboard = 1
 texture = ExtResource( 2 )
