@@ -79,8 +79,11 @@ func _process(delta: float) -> void:
 			$Root/Sprite.animation = 'idle' + String(dir)
 		EnemyState.Moving:
 			$Root/Sprite.animation = 'walk' + String(dir)
+			# ??? This might be setting global property. Fix.
+			$Root/Sprite.frames.set_animation_speed('walk' + String(dir), SPEED * 15)
 		EnemyState.Shooting:
 			$Root/Sprite.animation = 'walk' + String(dir)
+	$Root/Sprite.playing = true
 
 
 func ai_decision() -> void:
