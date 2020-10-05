@@ -50,7 +50,7 @@ damping = 1.0
 scale = 0.01
 scale_random = 0.5
 scale_curve = SubResource( 7 )
-color = Color( 0.352941, 0.352941, 1, 0.607843 )
+color = Color( 0.94902, 0.0941176, 0.0941176, 0.607843 )
 
 [sub_resource type="QuadMesh" id=9]
 
