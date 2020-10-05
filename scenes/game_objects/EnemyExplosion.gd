@@ -2,6 +2,7 @@ tool
 extends Position3D
 class_name EnemyExplosion
 
+const snd: AudioStreamOGGVorbis = preload("res://sounds/explode.ogg")
 
 export(bool) var emitting setget set_emitting, get_emitting
 
@@ -11,6 +12,14 @@ export(float) var ttl = 5.0
 func _ready():
 	$'Particles'.emitting = emitting
 	$'Particles2'.emitting = emitting
+
+	# ??? Godot crashing when opening EnemyExplosion.tscn.
+	# Doing this in software, then.
+	snd.set_loop(false)
+	var ap = AudioStreamPlayer3D.new()
+	ap.stream = snd
+	add_child(ap)
+	ap.play()
 
 func set_emitting(newval: bool) -> void:
 	$'Particles'.emitting = newval
