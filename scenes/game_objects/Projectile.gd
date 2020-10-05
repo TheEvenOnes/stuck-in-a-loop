@@ -23,16 +23,19 @@ func _physics_process(delta: float) -> void:
 	$Sprite3D.scale = Vector3(1, 1, 1) * (0.5 + 0.25 * sin(life * 25.0))
 
 	var overlapping_entities = $Area.get_overlapping_bodies()
+	
+	var make_particles: bool = false
 	for body in overlapping_entities:
 		if body.is_in_group('enemy') or body.is_in_group('environment'):
-			if body.is_in_group('enemy') && body.get_parent().get('take_damage') != null:
+			if body.is_in_group('enemy') && body.get_parent().has_method('take_damage') != null:
 				body.get_parent().take_damage(DAMAGE)
-			var particles = get_tree().current_scene.get_node('Particles')
-			var impact_anim = ProjectileImpact.instance()
-			particles.add_child(impact_anim)
-			impact_anim.global_transform.origin = global_transform.origin
-			translation.y -= 10.0
-			return
+			make_particles = true
+	if make_particles:
+		var particles = get_tree().current_scene.get_node('Particles')
+		var impact_anim = ProjectileImpact.instance()
+		particles.add_child(impact_anim)
+		impact_anim.global_transform.origin = global_transform.origin
+		translation.y -= 10.0
 
 	velocity.y -= delta * gravity
 	translation += velocity * delta
