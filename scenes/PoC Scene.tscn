@@ -322,7 +322,6 @@ shadow_enabled = true
 shadow_color = Color( 0.776471, 0.776471, 0.776471, 1 )
 shadow_bias = 0.02
 script = ExtResource( 11 )
-ANGULAR_SPEED = 0.05
 
 [node name="Projectiles" type="Spatial" parent="."]
 
